@@ -4,7 +4,9 @@ from .models import StatusInfo
 # Create your views here.
 
 def home(request):
-    return render(request,"base.html")
+    alldata = StatusInfo.objects.order_by('-timestamp')[:5]
+    context = {"alldata":alldata}
+    return render(request,"base.html",context)
 
 def search(request):
     query = request.GET['search']
